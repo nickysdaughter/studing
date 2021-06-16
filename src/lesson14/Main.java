@@ -12,5 +12,11 @@ public class Main {
         fridge.printAllProducts();
         fridge.getProduct("Яблоко", 30);
         fridge.printAllProducts();
+
+        fridge.printSortedProductList();
+        fridge.printEndingProduct();
+        fridge.printWeightAllProducts();
+
+
     }
 }

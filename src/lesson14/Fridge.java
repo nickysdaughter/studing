@@ -1,5 +1,7 @@
 package lesson14;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class Fridge {
@@ -32,6 +34,33 @@ public class Fridge {
             return;
         }
         products.put(product, currentValue - value);
+    }
 
+    public void printEndingProduct() {
+        Integer smallestValue = Integer.MAX_VALUE;
+        String smallestKey = null;
+        for (HashMap.Entry<String, Integer> entry : products.entrySet()) {
+            if (entry.getValue() < smallestValue) {
+                smallestKey = entry.getKey();
+                smallestValue = entry.getValue();
+            }
+        }
+        System.out.println("Меньше всего в холодильнике: " + smallestKey + " - " + smallestValue);
+
+    }
+
+    public void printWeightAllProducts() {
+        int totalWeight = 0;
+        for (Integer i : products.values()) {
+            totalWeight += i;
+        }
+        System.out.println(totalWeight);
+    }
+
+    public void printSortedProductList() {
+        ArrayList<String> sortedKeys = new ArrayList<>(products.keySet());
+        Collections.sort(sortedKeys);
+        for (String x : sortedKeys)
+            System.out.println(x + " - " + products.get(x));
     }
 }
