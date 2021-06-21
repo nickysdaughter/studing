@@ -23,9 +23,20 @@ public class Main4 {
         b.add(12);
 
         CollectionUtilsImpl utils = new CollectionUtilsImpl();
-        /*Collection<Integer> difference = utils.difference(a, b);
-        System.out.println(difference);*/
+        Collection<Integer> difference = utils.difference(a, b);
+        System.out.println(difference);
+
         Collection<Integer> union = utils.union(a, b);
         System.out.println(union);
+
+        Collection<Integer> intersection = utils.intersection(a, b);
+        System.out.println(intersection);
+
+        Collection<Integer> intersectionWithoutDuplicate = utils.intersectionWithoutDuplicate(a, b);
+        System.out.println(intersectionWithoutDuplicate);
+
+        Collection<Integer> unionWithoutDuplicate = utils.unionWithoutDuplicate(a, b);
+        System.out.println(unionWithoutDuplicate);
+
     }
 }
