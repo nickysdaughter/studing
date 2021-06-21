@@ -23,7 +23,9 @@ public class Main4 {
         b.add(12);
 
         CollectionUtilsImpl utils = new CollectionUtilsImpl();
-        Collection<Integer> difference = utils.difference(a, b);
-        System.out.println(difference);
+        /*Collection<Integer> difference = utils.difference(a, b);
+        System.out.println(difference);*/
+        Collection<Integer> union = utils.union(a, b);
+        System.out.println(union);
     }
 }

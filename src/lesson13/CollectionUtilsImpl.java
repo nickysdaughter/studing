@@ -1,15 +1,14 @@
 package lesson13;
 
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.Set;
+import java.util.*;
 
 public class CollectionUtilsImpl implements CollectionUtils {
 
 
     @Override
     public Collection<Integer> union(Collection<Integer> a, Collection<Integer> b) throws NullPointerException {
-        return null;
+        List listC = new ArrayList(); listC.addAll(a); listC.addAll(b);
+        return listC;
     }
 
     @Override
