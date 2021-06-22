@@ -48,6 +48,14 @@ public class Matrix implements IMatrix {
 
     @Override
     public IMatrix add(IMatrix otherMatrix) throws IllegalArgumentException, NullPointerException {
+        if (this.getRows() != otherMatrix.getRows()) {
+            System.out.println("Такие матрицы нельзя складывать, неравное кол-во строк");
+            return null;
+        }
+        if (this.getColumns() != otherMatrix.getColumns()) {
+            System.out.println("Такие матрицы нельзя складывать, неравное кол-во колонок");
+            return null;
+        }
         Matrix result = new Matrix(otherMatrix.getRows(), otherMatrix.getColumns());
         for (int i = 0; i < result.getRows(); i++) {
             for (int j = 0; j < result.getColumns(); i++) {
@@ -59,6 +67,14 @@ public class Matrix implements IMatrix {
 
     @Override
     public IMatrix sub(IMatrix otherMatrix) throws IllegalArgumentException, NullPointerException {
+        if (this.getRows() != otherMatrix.getRows()) {
+            System.out.println("Такие матрицы нельзя вычитать, неравное кол-во строк");
+            return null;
+        }
+        if (this.getColumns() != otherMatrix.getColumns()) {
+            System.out.println("Такие матрицы нельзя вычитать, неравное кол-во колонок");
+            return null;
+        }
         Matrix result = new Matrix(otherMatrix.getRows(), otherMatrix.getColumns());
         for (int i = 0; i < result.getRows(); i++) {
             for (int j = 0; j < result.getColumns(); j++) {
@@ -70,11 +86,15 @@ public class Matrix implements IMatrix {
 
     @Override
     public IMatrix mul(IMatrix otherMatrix) throws IllegalArgumentException, NullPointerException {
+        if (this.getRows() != otherMatrix.getColumns()) {
+            System.out.println("Такие матрицы нельзя перемножать, кол-во строк одной не равно кол-ву колонок другой");
+            return null;
+        }
         Matrix result = new Matrix(otherMatrix.getRows(), otherMatrix.getColumns());
-        for (int i = 0; i < result.getRows(); i++) {
-            for (int j = 0; j < result.getColumns(); j++) {
-                for (int k = 0; k < result.getColumns(); k++){
-                    //result += this.getValueAt(i, k) * otherMatrix.getValueAt(k, j); - problem!!!!
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < otherMatrix.getColumns(); j++) {
+                for (int k = 0; k < matrix.length; k++) {
+                    result.setValueAt(i, j, this.getValueAt(i, j) * otherMatrix.getValueAt(k, j));
                 }
             }
         }
@@ -83,18 +103,31 @@ public class Matrix implements IMatrix {
 
     @Override
     public IMatrix mul(double value) {
-
-        return null;
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                this.setValueAt(i, j, (this.getValueAt(i, j) * value));
+            }
+        }
+        return this;
     }
 
     @Override
     public IMatrix transpose() {
-        return null;
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                this.setValueAt(i, j, this.getValueAt(j, i));
+            }
+        }
+        return this;
     }
 
     @Override
     public void fillMatrix(double value) {
-
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                this.setValueAt(i, j, value);
+            }
+        }
     }
 
     @Override
@@ -116,16 +149,31 @@ public class Matrix implements IMatrix {
 
     @Override
     public boolean isIdentityMatrix() {
-        return false;
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; i++) {
+                if (matrix[i][j] != 1 && i == j) {     //НЕ ДОДЕЛАНО, не могу догнать:(
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     @Override
     public boolean isSquareMatrix() {
+        if (matrix.length == matrix[0].length) {
+            return true;
+        }
         return false;
     }
 
     @Override
     public void printToConsole() {
-
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                System.out.println(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 }
